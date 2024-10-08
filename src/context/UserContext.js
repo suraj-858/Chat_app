@@ -1,12 +1,12 @@
 import React,{ createContext, useState } from "react";
 import io from 'socket.io-client'
-const socket = io.connect("http://localhost:3001");
+const socket = io.connect("https://chat-app-rho-pink.vercel.app/");
 
  export const userContext = createContext();
  
 
 export const UserContext = ({children}) => {
-     const setter = " suraj is a goodboy"
+     const setter = "suraj is online"
      const [useSocket , setUseSocket] = useState();
 
 

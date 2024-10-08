@@ -1,17 +1,18 @@
 import React, { useState, useContext } from 'react'
 import { useEffect } from 'react';
-import ScrollToBottom from 'react-scroll-to-bottom';
+import ScrollToBottom  from 'react-scroll-to-bottom';
 
 import { userContext } from './context/UserContext';
 
 
 
 function Chat({ username, room}) {
-  const {setter, socket} = useContext(userContext);
+  const { socket} = useContext(userContext);
   
   
     const [currentMessage, setCurrentMessage] = useState("");
     const [messageList, setMessageList] = useState([]);
+    const [currentRecievedData, setRecievedData] = useState()
 
     const sendMessage = async() =>{
         if(currentMessage !== ""){
@@ -31,13 +32,14 @@ function Chat({ username, room}) {
 
     useEffect(() =>{
       socket.on("recieve_message", (data)=>{
+        setRecievedData(data);
         setMessageList((List) =>[...List, data])
       })
     }, [socket])
   return (
     <div className='chat-window'>
        <div className="chat-header">
-       <h3>{setter}</h3>
+       <h3>{currentRecievedData?.author} is online</h3>
        </div>
        <div className="chat-body">
         <ScrollToBottom className='message-container'>
