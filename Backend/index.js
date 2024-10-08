@@ -3,16 +3,14 @@ const app = express();
 const cors = require("cors")
 const {Server} = require("socket.io")
 const http = require("http")
-const dotenv = require('dotenv')
 
 app.use(cors())
-dotenv.config();
 
 const server = http.createServer(app);
 
 const io =  new Server(server,{
     cors: {
-        origin: process.env.Backend_URL, 
+        origin: "https://chat-app-3sye.vercel.app/", 
         methods:["GET" ,"POST"],
     }
 })
